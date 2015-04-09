@@ -75,6 +75,29 @@ void initializeGraph(Graph &g,
 	}
 }
 
+void findSpanningForest(Graph &g1, Graph &sf)
+// Create a graph sf that contains a spanning forest on the graph g.
+{
+	
+}
+
+bool isConnected(Graph &g)
+// Returns true if the graph g is connected. Otherwise returns false.
+{
+	return false;
+}
+
+bool isCyclic(Graph &g)
+// Returns true if the graph g contains a cycle. Otherwise, returns false.{
+	return false;
+}
+
+int totalEdgeWeight(Graph &g)
+// Returns the sum of all the edge weights
+{
+	return 0;
+}
+
 int main()
 {
 	//char x;
@@ -110,13 +133,13 @@ int main()
 		cout << "Num edges: " << num_edges(g) << endl;
 		cout << endl;
 
-		// cout << g;
+		//cout << g;
 
 		bool connected = false;
 		bool cyclic = false;
 
 		cout << "Calling isCyclic" << endl;
-		//cyclic = isCyclic(g);
+		cyclic = isCyclic(g);
 
 		if (cyclic)
 			cout << "Graph contains a cycle" << endl;
@@ -126,7 +149,7 @@ int main()
 		cout << endl;
 
 		cout << "Calling isConnected" << endl;
-		//connected = isConnected(g);
+		connected = isConnected(g);
 
 		if (connected)
 			cout << "Graph is connected" << endl;
@@ -139,13 +162,13 @@ int main()
 		// Initialize an empty graph to contain the spanning forest
 		Graph sf(num_vertices(g));
 
-		//findSpanningForest(g, sf);
+		findSpanningForest(g, sf);
 
-		//cout << "Spanning forest weight: " << totalEdgeWeight(sf) / 2 << endl;
+		cout << "Spanning forest weight: " << totalEdgeWeight(sf) / 2 << endl;
 		cout << endl;
 
 		cout << "Calling isConnected" << endl;
-		//connected = isConnected(sf);
+		connected = isConnected(sf);
 
 		if (connected)
 			cout << "Graph is connected" << endl;
