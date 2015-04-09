@@ -75,6 +75,36 @@ void initializeGraph(Graph &g,
 	}
 }
 
+void findPathDFSStack(Graph &g, size_t vD)
+{
+	stack<Graph::vertex_descriptor> path;
+	g[vD].visited = true;
+
+	// Get a pair containing iterators pointing to the beginning and end of the
+	// list of nodes adjacent to node v
+	pair<Graph::adjacency_iterator, Graph::adjacency_iterator>
+		aItrRange = adjacent_vertices(vD, g);
+
+	// Loop over adjacent nodes in the graph
+	for (Graph::adjacency_iterator aItr = aItrRange.first; aItr != aItrRange.second; ++aItr)
+	{
+		if (!g[*aItr].visited)
+		{
+			path.push(vD);
+			g[*aItr].visited = true;
+			findPathDFSStack(g, *aItr);
+		}
+	}
+}
+
+//Function to call other function
+void findPathDFSStack(Graph &g)
+{
+	clearVisited(g);
+	pair<Graph::vertex_iterator, Graph::vertex_iterator> vItrRange = vertices(g);
+	findPathDFSStack(g, *vItrRange.first);
+}
+
 void clearVisited(Graph &g)
 // Mark all nodes in g as not visited.
 {
@@ -98,7 +128,18 @@ void findSpanningForest(Graph &g1, Graph &sf)
 bool isConnected(Graph &g)
 // Returns true if the graph g is connected. Otherwise returns false.
 {
-	return false;
+	findPathDFSStack(g);
+	pair<Graph::vertex_iterator, Graph::vertex_iterator> vItrRange = vertices(g);
+
+	// Loop over all nodes in the graph
+	for (Graph::vertex_iterator vItr = vItrRange.first; vItr != vItrRange.second; ++vItr)
+	{
+		if (!g[*vItr].visited)
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 bool isCyclic(Graph &g)
