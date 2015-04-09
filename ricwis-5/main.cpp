@@ -75,6 +75,20 @@ void initializeGraph(Graph &g,
 	}
 }
 
+void clearVisited(Graph &g)
+// Mark all nodes in g as not visited.
+{
+	// Get a pair containing iterators pointing the beginning and end of the
+	// list of nodes
+	pair<Graph::vertex_iterator, Graph::vertex_iterator> vItrRange = vertices(g);
+
+	// Loop over all nodes in the graph
+	for (Graph::vertex_iterator vItr = vItrRange.first; vItr != vItrRange.second; ++vItr)
+	{
+		g[*vItr].visited = false;
+	}
+}
+
 void findSpanningForest(Graph &g1, Graph &sf)
 // Create a graph sf that contains a spanning forest on the graph g.
 {
