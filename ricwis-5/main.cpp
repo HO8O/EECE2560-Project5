@@ -95,7 +95,17 @@ bool isCyclic(Graph &g)
 int totalEdgeWeight(Graph &g)
 // Returns the sum of all the edge weights
 {
-	return 0;
+	int xReturn = 0;
+	// Get a pair containing iterators pointing the beginning and end of the
+	// list of edges
+	pair<Graph::edge_iterator, Graph::edge_iterator> eItrRange = edges(g);
+
+	// Loop over all edges in the graph
+	for (Graph::edge_iterator eItr = eItrRange.first; eItr != eItrRange.second; ++eItr)
+	{
+		xReturn += g[*eItr].weight;
+	}
+	return xReturn;
 }
 
 int main()
